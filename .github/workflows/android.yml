@@ -31,6 +31,12 @@ jobs:
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
           $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
+      - name: Configure AndroidX
+        run: |
+          mkdir -p android-app
+          echo "android.useAndroidX=true" > android-app/gradle.properties
+          echo "android.enableJetifier=true" >> android-app/gradle.properties
+
       - name: Create Android Project
         run: |
           mkdir -p android-app/app/src/main/assets
@@ -147,10 +153,6 @@ jobs:
               }
           }
           EOF
-                - name: Configure AndroidX
-          run: |
-          echo "android.useAndroidX=true" > android-app/gradle.properties
-          echo "android.enableJetifier=true" >> android-app/gradle.propertie
 
       - name: Build APK
         working-directory: android-app
