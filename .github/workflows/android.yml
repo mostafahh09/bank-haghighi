@@ -147,6 +147,10 @@ jobs:
               }
           }
           EOF
+                - name: Configure AndroidX
+          run: |
+          echo "android.useAndroidX=true" > android-app/gradle.properties
+          echo "android.enableJetifier=true" >> android-app/gradle.propertie
 
       - name: Build APK
         working-directory: android-app
